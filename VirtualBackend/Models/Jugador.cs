@@ -9,6 +9,7 @@
 
 namespace VirtualBackend.Models
 {
+    using Microsoft.IdentityModel.Tokens;
     using System;
     using System.Collections.Generic;
     
@@ -24,5 +25,8 @@ namespace VirtualBackend.Models
         public string paisResidencia { get; set; }
         public string fecUltimaConexion { get; set; }
         public string timeZone { get; set; }
+
+        public SecurityToken Token { get; set; }
+        public string CadenaToken { get; set; }
     }
 }

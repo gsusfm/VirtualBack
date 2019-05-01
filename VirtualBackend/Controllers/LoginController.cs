@@ -31,6 +31,7 @@ namespace VirtualBackend.Controllers
             }
             if (jugador.passwordHash == loginrequest.Password)
             {
+                jugador.CadenaToken = TokenGenerator.GenerateTokenJwt(loginrequest.Username);
                 return Ok(jugador);
             }
             else
