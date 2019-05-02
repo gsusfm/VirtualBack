@@ -53,7 +53,43 @@ namespace VirtualBackend.Controllers
             db.Jugador.Add(jugador);
             db.SaveChanges();
 
-            return Ok();
+            return Ok(jugador);
+        }
+
+        [HttpPost]
+        [Route("findEmail")]
+        [ResponseType(typeof(Jugador))]
+        public IHttpActionResult FindEmail(LoginRequest loginrequest)
+        {
+
+            Jugador jugador = db.Jugador.SqlQuery("SELECT * FROM virtualrobot_player.Jugador where email = @p0", loginrequest.Username).FirstOrDefault();
+
+            if (jugador == null)
+            {
+                return Unauthorized();
+            }
+            else
+            {
+                return Ok(jugador);
+            }
+        }
+
+        [HttpPost]
+        [Route("findUser")]
+        [ResponseType(typeof(Jugador))]
+        public IHttpActionResult FindUser(LoginRequest loginrequest)
+        {
+
+            Jugador jugador = db.Jugador.SqlQuery("SELECT * FROM virtualrobot_player.Jugador where nickname = @p0", loginrequest.Username).FirstOrDefault();
+
+            if (jugador == null)
+            {
+                return Unauthorized();
+            }
+            else
+            {
+                return Ok(jugador);
+            }
         }
 
     }
